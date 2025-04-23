@@ -17,7 +17,7 @@ RSpec.describe StringCalculator do
     end
 
     it 'returns the sum of multiple comma-separated numbers' do
-      expect(StringCalculator.add("1,2,3,4")).to eq(10)
+      expect(StringCalculator.add('1,2,3,4')).to eq(10)
     end
 
     it 'handles newlines as delimiters along with commas' do
@@ -26,6 +26,16 @@ RSpec.describe StringCalculator do
 
     it 'supports custom delimiters defined in the format //;\n1;2' do
       expect(StringCalculator.add("//;\n1;2")).to eq(3)
+    end
+
+    it 'raises an exception when a negative number is passed' do
+      expect { StringCalculator.add('1,-2') }
+        .to raise_error('negative numbers not allowed: -2')
+    end
+
+    it 'raises an exception listing all negative numbers if multiple are passed' do
+      expect { StringCalculator.add('1,-2,3,-4') }
+        .to raise_error('negative numbers not allowed: -2,-4')
     end
   end
 end
