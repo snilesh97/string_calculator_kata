@@ -4,6 +4,10 @@ class StringCalculator
   def self.add(numbers)
     return 0 if numbers.empty?
 
-    numbers.to_i
+    if numbers.include?(',')
+      numbers.split(',').map(&:to_i).sum
+    else
+      numbers.to_i
+    end
   end
 end
